@@ -1,0 +1,6 @@
+DELETION
+--------
+
+- Go to the left sub tree from delete node
+- Find the max node in the left sub tree from delete node
+- Replace the found node with the delete node
