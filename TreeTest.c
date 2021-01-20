@@ -11,6 +11,7 @@ int main()
     TreeNode *maxNd = NULL, *startNd = NULL;
     int a = 50, b = 16, c = 7, d = 89, e = 70;
     int f = 45, g = 10, h = 66, i = 95;
+    int A = 1, B = 2, C = 3, D = 4, E = 5, F = 6, G = 7; 
 
 /* ------------------------------------------------------------------------------------*/
 
@@ -196,65 +197,46 @@ int main()
     removeAt( tree, 45 );
     preOrder( tree ); printf("\n");
 
-/*
-    removeAt( tree, 70 );
-    printf("Remove 70:\t");
-    preOrder( tree ); printf("\n");
-
-    removeAt( tree, 89 );
-    printf("Remove 89:\t");
-    preOrder( tree ); printf("\n");
-
-
-    printf("\nTEST Remove in sequence: ");
-    if( tree->count == 0 )
-        printf("%sPASSED%s", GRN, RESET);
-    else
-        printf("%sFAILED%s", RED, RESET);
-*/
-    printf("\n");
-
-/* ------------------------------------------------------------------------------------*/
-/*
-    printf("==============================================\n\n");
-
-    insert( tree, 50, &a );
-    insert( tree, 16, &b );
-    insert( tree, 7, &c );
-    insert( tree, 89, &d );
-    insert( tree, 70, &e );
-    insert( tree, 45, &f );
-    insert( tree, 10, &g );
-    insert( tree, 66, &h );
-    insert( tree, 95, &i );
-
-    removeAt( tree, 89 );
-    printf("Remove 89:\t");
-    preOrder( tree ); printf("\n");
-
-    removeAt( tree, 16 );
-    printf("Remove 16:\t");
-    preOrder( tree ); printf("\n");
-
-    removeAt( tree, 50 );
-    removeAt( tree, 7 );
-    removeAt( tree, 70 );
+    printf("Remove None:\t");
     removeAt( tree, 45 );
-    removeAt( tree, 10 );
-    removeAt( tree, 66 );
-    removeAt( tree, 95 );
+    preOrder( tree );
 
-    printf("\nTEST Remove Node Child: ");
+    printf("Count: ");
     if( tree->count == 0 )
-        printf("%sPASSED%s", GRN, RESET);
+        printf("\t\t%sPASSED%s\n\n", GRN, RESET);
     else
-        printf("%sFAILED%s", RED, RESET);
+        printf("%sFAILED%s\n\n", RED, RESET);
 
     printf("\n");
-*/
+
 /* ------------------------------------------------------------------------------------*/
-/*
+
     printf("==============================================\n\n");
+
+    insert( tree, 'D', &D );    /* 4 */
+    insert( tree, 'B', &B );    /* 2 */
+    insert( tree, 'A', &A );    /* 1 */
+    insert( tree, 'C', &C );    /* 3 */
+    insert( tree, 'F', &F );    /* 6 */
+    insert( tree, 'E', &E );    /* 5 */
+    insert( tree, 'G', &G );    /* 7 */
+    
+    printf("Pre-Order: ");
+    preOrder(tree); printf("\n");
+
+    printf("Post-Order: ");
+    postOrder(tree); printf("\n");
+
+    printf("In-Order: ");
+    inOrder(tree); printf("\n");
+
+    freeTree( tree );
+
+/* ------------------------------------------------------------------------------------*/
+
+    printf("==============================================\n\n");
+    tree = createTree();
+    printf("Balance 1: ");
 
     insert( tree, 50, &a );
     insert( tree, 16, &b );
@@ -265,18 +247,44 @@ int main()
     insert( tree, 10, &g );
     insert( tree, 66, &h );
     insert( tree, 95, &i );
- */
-    /* 200 is invalid key because it was not inserted */
-/*    removeAt( tree, 200 );
 
-    printf("\nTEST Remove Invalid Key: ");
-    if( tree->count == 0 )
-        printf("%sPASSED%s", GRN, RESET);
+    if( isBalance( tree ) == TRUE )
+        printf("\t%sPASSED%s\n", GRN, RESET);
     else
-        printf("%sFAILED%s", RED, RESET);
-
-    printf("\n");
+        printf("%sFAILED%s\n", RED, RESET);
+        
     freeTree( tree );
-*/    
+
+    tree = createTree();
+
+    printf("Balance 2: ");
+    insert( tree, 50, &a );
+    insert( tree, 16, &b );
+    insert( tree, 89, &d );
+    insert( tree, 7, &c );
+    insert( tree, 95, &i );
+
+    if( isBalance( tree ) == TRUE )
+        printf("\t%sPASSED%s\n", GRN, RESET);
+    else
+        printf("%sFAILED%s\n", RED, RESET);
+    
+    freeTree( tree );
+
+    tree = createTree();
+
+    printf("Unbalance: ");
+    insert( tree, 50, &a );
+    insert( tree, 16, &b );
+    insert( tree, 89, &d );
+    insert( tree, 7, &c );
+ 
+    if( isBalance( tree ) == FALSE )
+        printf("\t%sPASSED%s\n", GRN, RESET);
+    else
+        printf("%sFAILED%s\n", RED, RESET);
+
+    freeTree( tree );
+      
     return 0;
 }

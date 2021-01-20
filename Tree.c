@@ -41,7 +41,10 @@ TreeNode* insertRec( Tree *tree, TreeNode *travelNd, TreeNode *newNd )
                 travelNd->left = insertRec( tree, travelNd->left, newNd );
         }
         else
+        {
             printf("Key is already existed\n");
+            free( newNd ); newNd = NULL;    /* Dont need that extra node */
+        }
     }
     else
         travelNd = newNd;   /* Base case reached means we have found the position */
@@ -53,6 +56,8 @@ void removeAt( Tree *tree, int inKey )
 {
     if( tree->root != NULL )
         tree->root = removeRec( tree, tree->root, inKey );
+    else
+        printf("Tree is empty\n");
 
     tree->count--;
 }
@@ -164,6 +169,41 @@ TreeNode* maximumRec( TreeNode *maxNd )
     return maxNd;
 }    
 
+int isBalance( Tree* tree )
+{
+    int left = 0, right = 0, balance = FALSE;
+
+    if( tree->root != NULL )
+    {
+        left = level( tree->root->left, 0, 0 );
+        right = level( tree->root->right, 0, 0 );
+
+        if( left == right )
+            balance = TRUE;
+    }
+    else
+        printf("Tree is empty\n");
+
+    return balance;
+}
+
+int level( TreeNode *currNd, int currDepth, int lastDepth )
+{
+    if( currNd != NULL )
+    {
+        lastDepth = level( currNd->left, currDepth+1, lastDepth+1 );
+        lastDepth = level( currNd->right, currDepth+1, lastDepth+1 );
+
+        /* Update the depth if deeper node is encountered */
+        if( currDepth > lastDepth )
+            lastDepth = currDepth;
+    }
+    else
+        --lastDepth;    /* Revert back as there are no tree node */
+
+    return lastDepth;
+}
+
 void preOrder( Tree *tree )
 {
     if( tree->root != NULL )
@@ -177,6 +217,38 @@ void preOrderRec( TreeNode *travelNd )
         printInteger( travelNd->data );
         preOrderRec( travelNd->left );
         preOrderRec( travelNd->right );
+    }
+}
+
+void postOrder( Tree *tree )
+{
+    if( tree->root != NULL )
+        postOrderRec( tree->root );
+}
+
+void postOrderRec( TreeNode *travelNd )
+{
+    if( travelNd != NULL )
+    {
+        postOrderRec( travelNd->left );
+        postOrderRec( travelNd->right );
+        printInteger( travelNd->data );
+    }
+}
+
+void inOrder( Tree *tree )
+{
+    if( tree->root != NULL )
+        inOrderRec( tree->root );
+}
+
+void inOrderRec( TreeNode *travelNd )
+{
+    if( travelNd != NULL )
+    {
+        inOrderRec( travelNd->left );
+        printInteger( travelNd->data );
+        inOrderRec( travelNd->right );
     }
 }
 

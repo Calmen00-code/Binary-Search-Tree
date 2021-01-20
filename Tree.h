@@ -30,6 +30,10 @@ void insert( Tree*, int, void* );
 TreeNode* insertRec( Tree*, TreeNode*, TreeNode* );
 void preOrder( Tree* );
 void preOrderRec( TreeNode* );
+void postOrder( Tree* );
+void postOrderRec( TreeNode* );
+void inOrder( Tree* );
+void inOrderRec( TreeNode* );
 void freeTree( Tree* );
 void freeTreeRec( TreeNode* );
 void removeAt( Tree*, int );
@@ -41,5 +45,7 @@ TreeNode* findNode( Tree*, int );
 TreeNode* findNodeRec( TreeNode*, int, int );
 TreeNode* promoteSuccessor( TreeNode* );
 TreeNode* findSuccessorRec( TreeNode* );
+int isBalance( Tree* );
+int level( TreeNode*, int, int );
 
 #endif
